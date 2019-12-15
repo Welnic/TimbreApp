@@ -19,7 +19,8 @@ public class Api extends AsyncTask<Void, Void, String> {
     final OkHttpClient client = new OkHttpClient();
 
     final Request request = new Request.Builder()
-            .url("http://www.mocky.io/v2/5dd8e2843100007400055ef2")
+            //.url("http://www.mocky.io/v2/5dd8e2843100007400055ef2")
+            .url("http://www.mocky.io/v2/5de00bbb350000225e480af4")
             .build();
     @Override
     protected String doInBackground(Void... voids) {
@@ -54,8 +55,9 @@ public class Api extends AsyncTask<Void, Void, String> {
                 Timbru timbru = new Timbru();
                 timbru.setId(jsonTimbru.getInt("id"));
                 timbru.setSerie(jsonTimbru.getString("serie"));
+                timbru.setTematica(jsonTimbru.getString("tematica"));
                 timbru.setAn(jsonTimbru.getInt("an"));
-                timbru.setRaritate(jsonTimbru.getString("raritate"));
+                timbru.setMarime((jsonTimbru.getString("marime")));
 
                 timbre.add(timbru);
             }
@@ -65,8 +67,9 @@ public class Api extends AsyncTask<Void, Void, String> {
                 Timbru timbru = new Timbru();
                 timbru.setId(jsonTimbru.getInt("id"));
                 timbru.setSerie(jsonTimbru.getString("serie"));
+                timbru.setTematica(jsonTimbru.getString("tematica"));
                 timbru.setAn(jsonTimbru.getInt("an"));
-                timbru.setRaritate(jsonTimbru.getString("raritate"));
+                timbru.setMarime(jsonTimbru.getString("marime"));
 
                 timbre.add(timbru);
             }

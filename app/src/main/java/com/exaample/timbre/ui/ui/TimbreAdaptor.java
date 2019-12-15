@@ -1,6 +1,8 @@
-package com.exaample.timbre.ui;
+package com.exaample.timbre.ui.ui;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,22 +54,33 @@ public class TimbreAdaptor extends BaseAdapter {
         View row = inflater.inflate(R.layout.listview_item, parent, false);
 
         TextView tvSerie = row.findViewById(R.id.tvSerie);
+        TextView tvTematica = row.findViewById(R.id.tvTematica);
         TextView tvAn = row.findViewById(R.id.tvAn);
-        TextView tvRaritate =  row.findViewById(R.id.tvRaritate);
+        TextView tvMarime = row.findViewById(R.id.tvMarime);
 
-        tvSerie.setText(lstTimbre.get(position).getSerie());
-        tvAn.setText(String.valueOf(lstTimbre.get(position).getAn()));
-        tvRaritate.setText(lstTimbre.get(position).getRaritate());
+        if(lstTimbre.get(position).getNou()==1){
+            tvSerie.setTextColor(Color.parseColor("#00FF00"));
+            tvTematica.setTextColor(Color.parseColor("#00FF00"));
+            tvAn.setTextColor(Color.parseColor("#00FF00"));
+            tvMarime.setTextColor(Color.parseColor("#00FF00"));
+        }
+
+        tvSerie.setText("Serie:  " + lstTimbre.get(position).getSerie());
+        tvAn.setText("An:   " + String.valueOf(lstTimbre.get(position).getAn()));
+        tvTematica.setText("Tematica:   "+ lstTimbre.get(position).getTematica() );
+        tvMarime.setText("Marime:   " + lstTimbre.get(position).getMarime());
 
         return row;
     }
-    public void updateLista(List<Timbru> listaNoua ){
-        try{
 
-            this.lstTimbre=listaNoua;
+    public void updateLista(List<Timbru> listaNoua) {
+        try {
+
+            this.lstTimbre = listaNoua;
             notifyDataSetChanged();
 
-        }catch (Exception e){
-            Log.e("eroare ",e.getMessage());
-        }}
+        } catch (Exception e) {
+            Log.e("eroare ", e.getMessage());
+        }
+    }
 }

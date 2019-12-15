@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".ui.AboutActivity">
+    tools:context=".ui.ui.AboutActivity">
 
     <TextView
         android:id="@+id/tvAbout"
         android:layout_width="344dp"
         android:layout_height="296dp"
+        android:gravity="center"
         android:text="TextView"
+        android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
         android:background="@drawable/round"
-        android:text="Inapoi"
+        android:text="Înapoi"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
