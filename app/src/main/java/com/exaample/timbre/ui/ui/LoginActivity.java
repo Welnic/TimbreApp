@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.exaample.timbre.R;
+import com.exaample.timbre.api.SharedPrefs;
+import com.exaample.timbre.api.room.Database;
+import com.exaample.timbre.models.Utilizator;
 import com.exaample.timbre.ui.ui.login.LoggedInUserView;
 import com.exaample.timbre.ui.ui.login.LoginViewModel;
 import com.exaample.timbre.ui.ui.login.LoginViewModelFactory;
@@ -32,6 +36,8 @@ import java.io.Writer;
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    private Utilizator existsUser = null;
+    private SharedPrefs prefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,24 +46,49 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final EditText usernameEditText = findViewById(R.id.etNume);
-        final EditText passwordEditText = findViewById(R.id.etParola);
+        final EditText usernameEditText = findViewById(R.id.username);
+        final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
+        final Button guestButton = findViewById(R.id.guestLogin);
         final Button utilizatorNou = findViewById(R.id.btnUtilizatorNou);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        prefs = SharedPrefs.getInstance(this);
+
+        guestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-
-                saveToJSON(username, password);
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("username", username);
-                startActivity(intent);
+                login(new Utilizator(username, password));
             }
         });
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String username = usernameEditText.getText().toString();
+                final String password = passwordEditText.getText().toString();
+                final Handler handler = new Handler();
+                (new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Database database = Database.getInstance(getBaseContext());
+                        existsUser = database.getDatabase().utilizatorDAO().gasesteUtilizatorul(username, password);
 
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (existsUser == null)
+                                    Toast.makeText(getBaseContext(), "Logare esuata", Toast.LENGTH_LONG).show();
+                                else {
+                                    Toast.makeText(getBaseContext(), "Logare cu succes", Toast.LENGTH_LONG).show();
+                                    login(existsUser);
+                                }
+                            }
+                        });
+                    }
+                })).start();
+            }
+        });
         utilizatorNou.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,14 +98,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome2) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-    }
-
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    private void login(Utilizator u) {
+        saveToJSON(u.numeUtilizator, u.parola);
+        prefs.saveString("id", u.id);
+        prefs.saveString("username", u.numeUtilizator);
+        prefs.saveString("password", u.parola);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.putExtra("username", u.numeUtilizator);
+        startActivity(intent);
     }
 
     private void saveToJSON(String username, String password) {

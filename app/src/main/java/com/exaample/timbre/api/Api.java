@@ -20,7 +20,7 @@ public class Api extends AsyncTask<Void, Void, String> {
 
     final Request request = new Request.Builder()
             //.url("http://www.mocky.io/v2/5dd8e2843100007400055ef2")
-            .url("http://www.mocky.io/v2/5de00bbb350000225e480af4")
+            .url("http://www.mocky.io/v2/5e062c9833000010ddec5cd6")
             .build();
     @Override
     protected String doInBackground(Void... voids) {
@@ -53,7 +53,7 @@ public class Api extends AsyncTask<Void, Void, String> {
             for (int i = 0; i < favorite22.length(); i++) {
                 JSONObject jsonTimbru = favorite22.getJSONObject(i);
                 Timbru timbru = new Timbru();
-                timbru.setId(jsonTimbru.getInt("id"));
+                timbru.setId(jsonTimbru.getString("id"));
                 timbru.setSerie(jsonTimbru.getString("serie"));
                 timbru.setTematica(jsonTimbru.getString("tematica"));
                 timbru.setAn(jsonTimbru.getInt("an"));
@@ -65,7 +65,7 @@ public class Api extends AsyncTask<Void, Void, String> {
             for (int i = 0; i < favorite23.length(); i++) {
                 JSONObject jsonTimbru = favorite23.getJSONObject(i);
                 Timbru timbru = new Timbru();
-                timbru.setId(jsonTimbru.getInt("id"));
+                timbru.setId(jsonTimbru.getString("id"));
                 timbru.setSerie(jsonTimbru.getString("serie"));
                 timbru.setTematica(jsonTimbru.getString("tematica"));
                 timbru.setAn(jsonTimbru.getInt("an"));

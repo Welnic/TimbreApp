@@ -45,4 +45,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fabRefresh"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="start|bottom"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:contentDescription="@string/add"-->
+<!--        android:src="@drawable/ic_add"-->
+<!--        app:backgroundTint="@color/colorPrimaryDark" />-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

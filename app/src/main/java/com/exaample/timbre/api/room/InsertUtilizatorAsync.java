@@ -26,4 +26,5 @@ public class InsertUtilizatorAsync extends AsyncTask<Utilizator, Void, Void> {
         }
         return null;
     }
+
 }
