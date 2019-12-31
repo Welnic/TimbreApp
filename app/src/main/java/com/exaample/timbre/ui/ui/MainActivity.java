@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.exaample.timbre.R;
+import com.exaample.timbre.api.SharedPrefs;
 import com.exaample.timbre.models.Timbru;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Button btFavorite;
     Button btAdauga;
     TextView etUser;
+    private SharedPrefs prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +31,25 @@ public class MainActivity extends AppCompatActivity {
         btAbout = findViewById(R.id.btDespre);
         btAdauga = findViewById(R.id.btAdauga);
         btFavorite = findViewById(R.id.btLista);
+        prefs = SharedPrefs.getInstance(this);
+
+        String username = prefs.getString("username");
+        if (!username.equals("")) {
+            etUser.setText(username);
+            etUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getBaseContext(), ProfilActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
         String userConectat = getIntent().getStringExtra("username");
-        if ( userConectat!= null) {
+        if (userConectat != null) {
             etUser.setText(userConectat);
         }
+
         btIesire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

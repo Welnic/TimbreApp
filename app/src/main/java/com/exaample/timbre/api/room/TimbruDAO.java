@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.exaample.timbre.models.Timbru;
 import com.exaample.timbre.models.Utilizator;
@@ -24,4 +25,6 @@ public interface TimbruDAO {
     @Query("DELETE FROM Timbru WHERE id = :timbruId")
     public void deleteTimbru(String timbruId);
 
+    @Update
+    public void updateTimbru(Timbru timbru);
 }

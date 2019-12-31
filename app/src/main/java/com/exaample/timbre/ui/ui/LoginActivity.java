@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Database database = Database.getInstance(getBaseContext());
-                        existsUser = database.getDatabase().utilizatorDAO().gasesteUtilizatorul(username, password);
+                        existsUser = database.getDatabase().utilizatorDAO().gasesteUtilizatorul(username, password, "");
 
                         handler.post(new Runnable() {
                             @Override
