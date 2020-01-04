@@ -1,10 +1,12 @@
 package com.exaample.timbre.ui.ui;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,6 +26,8 @@ import com.exaample.timbre.api.room.Database;
 import com.exaample.timbre.models.Timbru;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -33,6 +38,9 @@ public class FavoritesActivity extends AppCompatActivity {
     private ListView listView;
     private TimbreAdaptor timbreAdaptor;
     private Button btnBack;
+    private Button btnFilter;
+    private Button btnSaveFile;
+    private EditText etFiltru;
     private Timbru returnedResult;
     private FloatingActionButton fab;
     private FloatingActionButton fabRefresh;
@@ -44,7 +52,10 @@ public class FavoritesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
         lista = new ArrayList<>();
+        etFiltru = findViewById(R.id.etFilter);
         btnBack = findViewById(R.id.btnBack);
+        btnSaveFile = findViewById(R.id.btnSaveFile);
+        btnFilter = findViewById(R.id.btnFilter);
         listView = findViewById(R.id.lvTimbre);
         fab = findViewById(R.id.fab);
 //        fabRefresh = findViewById(R.id.fabRefresh);
@@ -67,6 +78,16 @@ public class FavoritesActivity extends AppCompatActivity {
                 startActivity(mainIntent);
             }
         });
+        btnSaveFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = "";
+                for (Timbru t : lista) {
+                    text += t.toString() + "\n";
+                }
+                writeToFile(text, getBaseContext());
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,12 +96,17 @@ public class FavoritesActivity extends AppCompatActivity {
                 finish();
             }
         });
-//        fabRefresh.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                getTimbre();
-//            }
-//        });
+        btnFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String filtru = etFiltru.getText().toString();
+                if (filtru.equals("")) {
+                    getTimbre("");
+                } else {
+                    getTimbre("%" + filtru + "%");
+                }
+            }
+        });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -109,8 +135,9 @@ public class FavoritesActivity extends AppCompatActivity {
                         if (returnedResult != null) {
 //                            lista.add(returnedResult);
                         }
-                        if (database.getDatabase().timbruDAO().gasesteTimbru(listaJson.get(0).getId()) == 0)
+                        if (database.getDatabase().timbruDAO().gasesteTimbru(userId) == 0)
                             for (Timbru t : listaJson) {
+                                t.setId(UUID.randomUUID().toString());
                                 t.setIdUser(userId);
                                 database.getDatabase().timbruDAO().insertTimbru(t);
                             }
@@ -118,7 +145,7 @@ public class FavoritesActivity extends AppCompatActivity {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                getTimbre();
+                                getTimbre("");
                             }
                         });
                     }
@@ -138,14 +165,28 @@ public class FavoritesActivity extends AppCompatActivity {
         }
     }
 
-    private void getTimbre() {
+    private void writeToFile(String data, Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("timbre.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+    private void getTimbre(final String filtruSerie) {
         final Handler handler = new Handler();
         (new Thread(new Runnable() {
             @Override
             public void run() {
                 Database database = Database.getInstance(getBaseContext());
-                lista.addAll(database.getDatabase().timbruDAO().gasesteTimbre(userId));
-
+                lista.clear();
+                if (filtruSerie.equals(""))
+                    lista.addAll(database.getDatabase().timbruDAO().gasesteTimbre(userId));
+                else {
+                    lista.addAll(database.getDatabase().timbruDAO().gasesteTimbreBySerie(userId, filtruSerie));
+                }
                 handler.post(new Runnable() {
                     @Override
                     public void run() {

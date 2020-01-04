@@ -148,7 +148,7 @@ public class LoginActivity extends AppCompatActivity {
                 output.close();
             }
 
-            Toast toast = Toast.makeText(getApplicationContext(), "User saved and updated", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplicationContext(), "User saved to json and updated", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 10);
             toast.show();
 

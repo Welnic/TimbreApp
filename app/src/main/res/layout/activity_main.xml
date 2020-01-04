@@ -25,8 +25,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="360dp"
+        android:layout_width="143dp"
+        android:layout_height="473dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,16 +40,25 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="50px"
             android:background="@drawable/round"
-            android:text="Favorite"
+            android:text="@string/favorite"
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/btAdauga"
+            android:id="@+id/btMonede"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50px"
             android:background="@drawable/round"
-            android:text="Adaugă"
+            android:text="@string/adaug_monede"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btTimbre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50px"
+            android:background="@drawable/round"
+            android:text="@string/adaug_timbre"
             android:textSize="18sp" />
 
         <Button
@@ -58,7 +67,16 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="50px"
             android:background="@drawable/round"
-            android:text="Despre"
+            android:text="@string/despre"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btHarta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50px"
+            android:background="@drawable/round"
+            android:text="@string/harta"
             android:textSize="18sp" />
 
         <Button
@@ -67,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="50px"
             android:background="@drawable/round"
-            android:text="Ieșire"
+            android:text="@string/ie_ire"
             android:textSize="18sp" />
 
     </LinearLayout>

@@ -10,14 +10,15 @@ import android.widget.TextView;
 
 import com.exaample.timbre.R;
 import com.exaample.timbre.api.SharedPrefs;
-import com.exaample.timbre.models.Timbru;
 
 public class MainActivity extends AppCompatActivity {
 
     Button btIesire;
     Button btAbout;
     Button btFavorite;
-    Button btAdauga;
+    Button btTimbre;
+    Button btMonede;
+    Button btHarta;
     TextView etUser;
     private SharedPrefs prefs;
 
@@ -29,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
         etUser = (findViewById(R.id.etUsername));
         btIesire = (findViewById(R.id.btIesire));
         btAbout = findViewById(R.id.btDespre);
-        btAdauga = findViewById(R.id.btAdauga);
+        btTimbre = findViewById(R.id.btTimbre);
+        btMonede = findViewById(R.id.btMonede);
         btFavorite = findViewById(R.id.btLista);
+        btHarta = findViewById(R.id.btHarta);
         prefs = SharedPrefs.getInstance(this);
 
         String username = prefs.getString("username");
@@ -66,11 +69,30 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-        btAdauga.setOnClickListener(new View.OnClickListener() {
+        btTimbre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this.getBaseContext(), AddActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        btHarta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this.getBaseContext(), MapsActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btMonede.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this.getBaseContext(), MonedeActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -16,8 +16,11 @@ public interface TimbruDAO {
     @Query("SELECT * FROM Timbru WHERE idUser LIKE :userId")
     List<Timbru> gasesteTimbre(String userId);
 
-    @Query("SELECT COUNT(*) FROM Timbru WHERE id LIKE :timbruId")
-    int gasesteTimbru(String timbruId);
+    @Query("SELECT * FROM Timbru WHERE idUser LIKE :userId AND serie LIKE :serie")
+    List<Timbru> gasesteTimbreBySerie(String userId, String serie);
+
+    @Query("SELECT COUNT(*) FROM Timbru WHERE idUser LIKE :userId")
+    int gasesteTimbru(String userId);
 
     @Insert
     public void insertTimbru(Timbru timbru);

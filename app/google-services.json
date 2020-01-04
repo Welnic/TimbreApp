@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "980921844997",
+    "firebase_url": "https://timpreapp.firebaseio.com",
+    "project_id": "timpreapp",
+    "storage_bucket": "timpreapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980921844997:android:25e0d2c405b72b3ca8a36c",
+        "android_client_info": {
+          "package_name": "com.exaample.timbre"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980921844997-o20focv28nam14e87sbbhd374j5hke3d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.exaample.timbre",
+            "certificate_hash": "152f1b8269141f37a34dde82eda3dc03060ddfb0"
+          }
+        },
+        {
+          "client_id": "980921844997-nci1scc0a7oa9q7op02idhuo55u00h64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZQhdDyET7ugWglFzDKE576mSZPcG5IPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980921844997-nci1scc0a7oa9q7op02idhuo55u00h64.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

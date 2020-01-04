@@ -15,4 +15,14 @@
     <string name="e_mail">e-mail</string>
     <string name="parola">parola</string>
     <string name="utilizator_nou">utilizator nou</string>
+    <string name="filtreaz">filtrează</string>
+    <string name="adaug_monede">Adaugă monede</string>
+    <string name="adaug_timbre">Adaugă timbre</string>
+    <string name="nume_timbru">nume timbru</string>
+    <string name="exporta">exporta</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="harta">Harta</string>
+    <string name="despre">Despre</string>
+    <string name="ie_ire">Ieșire</string>
+    <string name="favorite">Favorite</string>
 </resources>
