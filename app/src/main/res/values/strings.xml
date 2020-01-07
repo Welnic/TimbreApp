@@ -10,7 +10,6 @@
     <string name="login_failed">"Login failed"</string>
     <string name="welcome2">Logare cu succes</string>
     <string name="add">add</string>
-    <string name="napoi">Înapoi</string>
     <string name="inregistreaza_te">inregistreaza-te</string>
     <string name="e_mail">e-mail</string>
     <string name="parola">parola</string>
@@ -25,4 +24,21 @@
     <string name="despre">Despre</string>
     <string name="ie_ire">Ieșire</string>
     <string name="favorite">Favorite</string>
+    <string name="logare">Logare</string>
+    <string name="logare_guest">Logare guest</string>
+    <string name="lista">Lista</string>
+    <string name="valoare">Valoare</string>
+    <string name="nume">Nume</string>
+    <string name="timbru_nou">TIMBRU NOU</string>
+    <string name="seria">Seria</string>
+    <string name="tematica">Tematica</string>
+    <string name="an">An</string>
+    <string name="marime">Marime</string>
+    <string name="adaug">Adaugă</string>
+    <string name="textview">TextView</string>
+    <string name="napoi">Înapoi</string>
+    <string name="user">user</string>
+    <string name="salveaxz">Salvează</string>
+    <string name="sterge_contul">Sterge contul</string>
+    <string name="empty" />
 </resources>

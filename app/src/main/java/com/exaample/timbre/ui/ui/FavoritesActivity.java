@@ -58,7 +58,6 @@ public class FavoritesActivity extends AppCompatActivity {
         btnFilter = findViewById(R.id.btnFilter);
         listView = findViewById(R.id.lvTimbre);
         fab = findViewById(R.id.fab);
-//        fabRefresh = findViewById(R.id.fabRefresh);
 
         returnedResult = getIntent().getParcelableExtra("timbru");
 
@@ -86,6 +85,7 @@ public class FavoritesActivity extends AppCompatActivity {
                     text += t.toString() + "\n";
                 }
                 writeToFile(text, getBaseContext());
+                Toast.makeText(getBaseContext(), "Fisier exportat cu succes!", Toast.LENGTH_LONG).show();
             }
         });
         fab.setOnClickListener(new View.OnClickListener() {
@@ -159,8 +159,6 @@ public class FavoritesActivity extends AppCompatActivity {
         if (requestCode == 113) {
             if (resultCode == RESULT_OK) {
                 returnedResult = data.getParcelableExtra("timbru");
-                // OR
-                // String returnedResult = data.getDataString();
             }
         }
     }

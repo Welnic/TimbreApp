@@ -3,6 +3,7 @@ package com.exaample.timbre.ui.ui;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
@@ -36,6 +37,12 @@ public class DeleteDialogFragment extends DialogFragment {
                         })).start();
                     }
                 })
+//                .setNeutralButton("Editeaza", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Intent intent = new Intent(getActivity(),AddActivity.class);
+//                    }
+//                })
                 .setNegativeButton("Închide", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the dialog

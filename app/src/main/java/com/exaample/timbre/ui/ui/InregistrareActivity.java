@@ -2,6 +2,7 @@ package com.exaample.timbre.ui.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.exaample.timbre.api.room.Database;
 import com.exaample.timbre.api.room.InsertUtilizatorAsync;
 import com.exaample.timbre.models.Utilizator;
 
+import java.util.Locale;
 import java.util.Random;
 import java.util.UUID;
 
@@ -41,21 +43,27 @@ public class InregistrareActivity extends AppCompatActivity {
                 usr.parola = parola;
                 usr.id = UUID.randomUUID().toString();
 
-                final Handler handler = new Handler();
-                (new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Database database = Database.getInstance(getBaseContext());
-                        database.getDatabase().utilizatorDAO().insertUtilizator(usr);
+                if (utilizator.equals("") || parola.equals("")) {
+                    Toast.makeText(getBaseContext(), "Date gresite!", Toast.LENGTH_LONG).show();
+                } else {
+                    final Handler handler = new Handler();
+                    (new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Database database = Database.getInstance(getBaseContext());
+                            database.getDatabase().utilizatorDAO().insertUtilizator(usr);
 
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getBaseContext(), "Cont creat cu succes", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }
-                })).start();
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Intent intent = new Intent(InregistrareActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                    Toast.makeText(getBaseContext(), "Cont creat cu succes", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                    })).start();
+                }
             }
         });
     }

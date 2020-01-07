@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,36 +48,40 @@ public class AddActivity extends AppCompatActivity {
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Timbru timbru = new Timbru();
-                timbru.setId(UUID.randomUUID().toString());
-                timbru.setTematica(etTematica.getText().toString());
-                timbru.setSerie(etSerie.getText().toString());
-                timbru.setAn(Integer.parseInt(etAn.getText().toString()));
-                timbru.setMarime(etMarime.getText().toString());
-                timbru.setNou(1);
+                try{
 
-                final Handler handler = new Handler();
-                (new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Database database = Database.getInstance(getBaseContext());
-                        timbru.setIdUser(userId);
-                        database.getDatabase().timbruDAO().insertTimbru(timbru);
+                    final Timbru timbru = new Timbru();
+                    timbru.setId(UUID.randomUUID().toString());
+                    timbru.setTematica(etTematica.getText().toString());
+                    timbru.setSerie(etSerie.getText().toString());
+                    timbru.setAn(Integer.parseInt(etAn.getText().toString()));
+                    timbru.setMarime(etMarime.getText().toString());
+                    timbru.setNou(1);
 
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Intent intent = new Intent(AddActivity.this.getBaseContext(), FavoritesActivity.class);
-                                intent.putExtra("timbru", timbru);
-                                setResult(RESULT_OK, intent);
-                                startActivityForResult(intent, 123);
-                                finish();
-                            }
-                        });
-                    }
-                })).start();
+                    final Handler handler = new Handler();
+                    (new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Database database = Database.getInstance(getBaseContext());
+                            timbru.setIdUser(userId);
+                            database.getDatabase().timbruDAO().insertTimbru(timbru);
 
-
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Intent intent = new Intent(AddActivity.this.getBaseContext(), FavoritesActivity.class);
+                                    intent.putExtra("timbru", timbru);
+                                    setResult(RESULT_OK, intent);
+                                    startActivityForResult(intent, 123);
+                                    finish();
+                                }
+                            });
+                        }
+                    })).start();
+                }catch (Exception e){
+                    Toast.makeText(getBaseContext(),"Nu se poate adauga timbrul!", Toast.LENGTH_LONG).show();
+                    Log.d("eroare",e.getMessage());
+                }
             }
         });
 

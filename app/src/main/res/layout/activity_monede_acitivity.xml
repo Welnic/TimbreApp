@@ -40,7 +40,7 @@
             android:layout_marginBottom="50px"
             android:background="@drawable/round"
             android:gravity="center"
-            android:hint="Nume"
+            android:hint="@string/nume"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
             android:textSize="18sp" />
@@ -53,7 +53,8 @@
             android:layout_marginBottom="50px"
             android:background="@drawable/round"
             android:gravity="center"
-            android:hint="An"
+            android:hint="@string/an"
+            android:inputType="number"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
             android:textSize="18sp" />
@@ -66,7 +67,8 @@
             android:layout_marginBottom="50px"
             android:background="@drawable/round"
             android:gravity="center"
-            android:hint="Valoare"
+            android:hint="@string/valoare"
+            android:inputType="number"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
             android:textSize="18sp" />
@@ -78,7 +80,7 @@
             android:layout_marginTop="50px"
             android:layout_marginBottom="50px"
             android:background="@color/colorPrimaryDark"
-            android:text="Adaugă"
+            android:text="@string/adaug"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
@@ -90,11 +92,25 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
         android:background="@drawable/round"
-        android:text="Înapoi"
+        android:text="@string/napoi"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btLista"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/round"
+        android:text="@string/lista"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

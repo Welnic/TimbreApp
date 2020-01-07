@@ -17,7 +17,7 @@
         android:layout_marginRight="16dp"
         android:background="@drawable/round"
         android:gravity="center"
-        android:hint="user"
+        android:hint="@string/user"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textSize="18sp"
